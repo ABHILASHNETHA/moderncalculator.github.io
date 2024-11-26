@@ -1,0 +1,199 @@
+manifest file
+{
+    "update_url": "https://clients2.google.com/service/update2/crx",
+
+    "manifest_version": 3,
+    "name": "Feet & Inches Calculator",
+    "version": "1.0",
+    "description": "A calculator for feet and inches.",
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icon.png",
+            "48": "icon.png",
+            "128": "icon.png"
+        }
+    },
+    "permissions": []
+}
+
+
+
+popup.js
+document.getElementById('calculate').addEventListener('click', function() {
+    // Get the first measurement in feet and inches
+    const feet1 = parseInt(document.getElementById('feet1').value) || 0;
+    const inches1 = parseInt(document.getElementById('inches1').value) || 0;
+
+    // Get the second measurement in feet and inches
+    const feet2 = parseInt(document.getElementById('feet2').value) || 0;
+    const inches2 = parseInt(document.getElementById('inches2').value) || 0;
+
+    // Get the selected operation
+    const operation = document.getElementById('operation').value;
+
+    // Convert both measurements to inches
+    const totalInches1 = (feet1 * 12) + inches1;
+    const totalInches2 = (feet2 * 12) + inches2;
+
+    let resultInches;
+
+    // Perform the chosen operation
+    if (operation === "add") {
+        resultInches = totalInches1 + totalInches2;
+    } else {
+        resultInches = totalInches1 - totalInches2;
+    }
+
+    // Convert the result back to feet and inches
+    const resultFeet = Math.floor(resultInches / 12);
+    const resultInchesRemainder = resultInches % 12;
+
+    // Display the result
+    document.getElementById('result').innerText = `Result: ${resultFeet}' ${resultInchesRemainder}"`;
+});
+
+
+
+popup.html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Feet & Inches Calculator</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            width: 300px;
+            padding: 20px;
+            background-color: #f1f1f1;
+            /* Light background color */
+            border-radius: 10px;
+            /* Rounded corners */
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            /* Soft shadow for depth */
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        /* Title Styling */
+        h3 {
+            color: #000000;
+            /* Darker color for contrast */
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Label Styling */
+        label {
+            display: block;
+            font-size: 14px;
+            color: #666;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        /* Input Styling */
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #2e00fc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+
+        /* Button Styling */
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            /* Primary button color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #21f006;
+            /* Darker on hover */
+        }
+
+        /* Result Styling */
+        #result {
+            font-size: 30px;
+            color: #007bff;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e9f7ff;
+            /* Light background for result */
+            border: 2px solid #007bff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Feet & Inches Calculator</h3>
+
+    <!-- Input Fields for Measurements -->
+    <label>First Measurement:</label>
+    <input type="number" id="feet1" placeholder="Feet">
+    <input type="number" id="inches1" placeholder="Inches">
+
+    <label>Second Measurement:</label>
+    <input type="number" id="feet2" placeholder="Feet">
+    <input type="number" id="inches2" placeholder="Inches">
+
+    <!-- Dropdown for Selecting Operation -->
+    <label>Operation:</label>
+    <select id="operation">
+        <option value="subtract">Subtract</option>
+        <option value="add">Add</option>
+    </select>
+
+    <!-- Calculate Button -->
+    <button id="calculate">Calculate</button>
+
+    <!-- Result Display -->
+    <div id="result"></div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html> 
+
+
+
+_metadata/verified_contents.json
+[{
+    "description": "treehash per file",
+    "signed_content": {
+        "payload": "eyJjb250ZW50X2hhc2hlcyI6W3siYmxvY2tfc2l6ZSI6NDA5NiwiZGlnZXN0Ijoic2hhMjU2IiwiZmlsZXMiOlt7InBhdGgiOiJpY29uLnBuZyIsInJvb3RfaGFzaCI6InY0S0JEWXNQelFGUHhUbG9UVGtTX29wd2NCUmRZT3YyaHd2T09BZVRpaUkifSx7InBhdGgiOiJtYW5pZmVzdC5qc29uIiwicm9vdF9oYXNoIjoib0VJWUtTaV96NHdTNjAyWmhsVjFhNGd3WGNiZXpTNGtFd2JQcWVYd0RWdyJ9LHsicGF0aCI6InBvcHVwLmh0bWwiLCJyb290X2hhc2giOiJhb3p2OGx0M3daQjV5V2JieTVRdWRKWnYxa3Fmekpsb19vVE5yX3FpSk84In0seyJwYXRoIjoicG9wdXAuanMiLCJyb290X2hhc2giOiJncnN5aUVNdEt3VWl3LWRCVEZJemdTZERIQmhUUEU5SHJMUjZDalpPMEd3In1dLCJmb3JtYXQiOiJ0cmVlaGFzaCIsImhhc2hfYmxvY2tfc2l6ZSI6NDA5Nn1dLCJpdGVtX2lkIjoia2Nkb2RvY2RjaWRvYmhiZ2dhb2diZGFuYm9kZGhpamMiLCJpdGVtX3ZlcnNpb24iOiIxLjAiLCJwcm90b2NvbF92ZXJzaW9uIjoxfQ",
+        "signatures": [{
+            "header": {
+                "kid": "publisher"
+            },
+            "protected": "eyJhbGciOiJSUzI1NiJ9",
+            "signature": "SAp-rsR78K1vrqVKk7kF0F8vZuuZA-x61lmn82D7hYrfKFqRW-GJ-Rl1H-oiEDCVrTrdWYI0iTGo0j5O-olzFB_5zko_Ae1lhl2KviUKofS8IOwDJczQOZfsxi7pzyIjL8-rhS6LIr5zNimpK1Te3z3pVrHKPIXb2ntupzf7kap6g3kwdjF8HRVc5S53IYyGyRSWe8aV6kC4EyI7ztuNuZTTJ7uzu33jfUch3fYBUJYYNyI7xNzjOVpqOzU6dnNcvhmxpT0or7YqnjVh3FzmCVrPVr2oKfZYQcekSMKM_TR2gBL1-NI7bTqm7fs-3VSrAIpJrC5I5EswoeGMVCcC_w"
+        }, {
+            "header": {
+                "kid": "webstore"
+            },
+            "protected": "eyJhbGciOiJSUzI1NiJ9",
+            "signature": "eB6VsQBJWbqvJhksrYvtb4kTbBpuh3Wta8OGGGLeV0ELsIbetjqwRE1ducC3oKDgECMsJu8MRc-6XIY9a45hOuD-mmGCdlrjWwW9tsfkR2BKjHoQNaaGT2vVCmhqh2bjEbsPCux6psulV2NQd8_SE4uc-jw5D2nNP_ASQfc68JXCrnZMDJvITWv2xs9aTXtMvHkWpvwXoQy3w169ige1IkZYmq9i1E5e6-GzyZeKfCVeLCFZd4YsEwd_PXGe8tOHW-tPvaA0-OgflgjdwjdzG8D9t8WbhoYVc3emnok9rIv3mwC3DxjgvCZbxBI5Zh21_uITsY7rsTabtVCCiT0-pA"
+        }]
+    }
+}]
+
+
